@@ -986,7 +986,7 @@ export default function HomePage() {
           </div>
 
           {/* ── 3. Centered Action Bar (Bottom CTAs) ────────────────── */}
-          <div ref={ctaRef} className="imax-hero-ctas" style={{ pointerEvents: 'auto' }}>
+          <div ref={ctaRef} className="imax-hero-ctas" style={{ pointerEvents: 'none' }}>
             <a
               href="#services"
               className="btn btn-dark"
@@ -999,6 +999,7 @@ export default function HomePage() {
                 gap: '8px',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
+                pointerEvents: 'auto',
               }}
             >
               <FiEye size={15} /> Explore Work ↓
@@ -1015,6 +1016,7 @@ export default function HomePage() {
                 gap: '8px',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
+                pointerEvents: 'auto',
               }}
             >
               <FiBriefcase size={15} /> Direct Inquiry ↗
@@ -1033,6 +1035,7 @@ export default function HomePage() {
                 color: 'var(--accent-light)',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
+                pointerEvents: 'auto',
               }}
             >
               <FiMessageSquare size={15} /> Talk to Chirag AI ⚡

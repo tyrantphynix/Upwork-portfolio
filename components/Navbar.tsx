@@ -105,7 +105,7 @@ export default function Navbar() {
 
         /* Desktop: transparent full width at top, floats when scrolled */
         .nav-pill-wrapper {
-          pointer-events: auto;
+          pointer-events: none;
           display: flex;
           align-items: center;
           width: 100%;
@@ -123,6 +123,7 @@ export default function Navbar() {
         }
 
         .nav-pill-wrapper.is-scrolled {
+          pointer-events: auto;
           width: min(1000px, calc(100% - 20px));
           max-width: 1000px;
           height: 54px;
@@ -212,15 +213,16 @@ export default function Navbar() {
                 letterSpacing: '-0.03em',
                 flexShrink: 0,
                 textDecoration: 'none',
+                pointerEvents: 'auto',
               }}
             >
               chirag<span style={{ color: 'var(--accent)' }}>.</span>
             </Link>
 
             {/* Desktop links + Controls wrapper (aligned right) */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginLeft: 'auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginLeft: 'auto', pointerEvents: 'none' }}>
               {/* ── Desktop nav links (CSS-controlled visibility) ── */}
-              <div ref={linksRef} className="nav-desktop-links">
+              <div ref={linksRef} className="nav-desktop-links" style={{ pointerEvents: 'none' }}>
                 {links.map((link) => {
                   const isActive = pathname === link.href;
                   return (
@@ -239,6 +241,7 @@ export default function Navbar() {
                         transition: 'background-color 0.18s ease, color 0.18s ease',
                         textDecoration: 'none',
                         whiteSpace: 'nowrap',
+                        pointerEvents: 'auto',
                       }}
                       onMouseEnter={(e) => {
                         if (!isActive) {
@@ -260,7 +263,7 @@ export default function Navbar() {
               </div>
 
               {/* Right-most controls: Theme Toggle + Contact button + hamburger */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, pointerEvents: 'none' }}>
                 {/* Theme Toggle Button */}
                 <motion.button
                   whileTap={{ scale: 0.9 }}
@@ -278,6 +281,7 @@ export default function Navbar() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'border-color 0.18s ease, background-color 0.18s ease',
+                    pointerEvents: 'auto',
                   }}
                   aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                   title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -290,7 +294,7 @@ export default function Navbar() {
                   href="/contact"
                   id="nav-contact-btn"
                   className="btn btn-dark nav-hire-desktop"
-                  style={{ padding: '8px 18px', fontSize: '0.82rem' }}
+                  style={{ padding: '8px 18px', fontSize: '0.82rem', pointerEvents: 'auto' }}
                 >
                   Contact ↗
                 </Link>
@@ -311,6 +315,7 @@ export default function Navbar() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'border-color 0.18s ease, background-color 0.18s ease',
+                    pointerEvents: 'auto',
                   }}
                   aria-label="Toggle navigation menu"
                 >
