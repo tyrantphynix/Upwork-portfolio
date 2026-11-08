@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { gsap } from 'gsap';
@@ -540,6 +540,24 @@ export default function HomePage() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
+  // Progressive loading & Reduced motion accessibility states
+  const [splineLoaded, setSplineLoaded] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check if user prefers reduced motion (OS accessibility / low power mode)
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setPrefersReducedMotion(mediaQuery.matches);
+
+      const handleChange = (e: MediaQueryListEvent) => {
+        setPrefersReducedMotion(e.matches);
+      };
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.5 });
@@ -605,7 +623,7 @@ export default function HomePage() {
           backgroundColor: '#000000',
         }}
       >
-        {/* ── Fullscreen Interactive 3D Spline Robot Canvas ── */}
+        {/* ── Progressive Loading Instant Poster Frame (Renders in 0ms) ── */}
         <div
           style={{
             position: 'absolute',
@@ -613,23 +631,58 @@ export default function HomePage() {
             width: '100%',
             height: '100%',
             zIndex: 1,
-            pointerEvents: 'auto',
-            overflow: 'hidden',
+            pointerEvents: 'none',
+            opacity: splineLoaded && !prefersReducedMotion ? 0 : 1,
+            transition: 'opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#000000',
           }}
         >
-          <iframe
-            src="https://my.spline.design/robotfollowcursorforlandingpage-W46xmVWmgF3Jk3tRP40IX7Wh/"
-            title="Interactive 3D Robot Hero Canvas"
+          <Image
+            src="/images/robot_poster.jpg"
+            alt="Chirag Robot AI Architect"
+            fill
+            priority
+            sizes="100vw"
             style={{
-              width: '100%',
-              height: 'calc(100% + 50px)',
-              border: 'none',
-              background: '#000000',
-              pointerEvents: 'auto',
+              objectFit: 'cover',
+              objectPosition: 'center center',
             }}
-            allow="accelerometer; gyroscope"
           />
         </div>
+
+        {/* ── Fullscreen Interactive 3D Spline Robot Canvas (Loaded progressively) ── */}
+        {!prefersReducedMotion && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 2,
+              pointerEvents: 'auto',
+              overflow: 'hidden',
+              opacity: splineLoaded ? 1 : 0,
+              transition: 'opacity 0.8s ease',
+            }}
+          >
+            <iframe
+              src="https://my.spline.design/robotfollowcursorforlandingpage-W46xmVWmgF3Jk3tRP40IX7Wh/"
+              title="Interactive 3D Robot Hero Canvas"
+              onLoad={() => setSplineLoaded(true)}
+              style={{
+                width: '100%',
+                height: 'calc(100% + 50px)',
+                border: 'none',
+                background: 'transparent',
+                pointerEvents: 'auto',
+              }}
+              allow="accelerometer; gyroscope"
+            />
+          </div>
+        )}
 
         {/* ── Floating HUD Interface Layers (Directly on top of 3D Canvas) ── */}
         <div
@@ -649,9 +702,9 @@ export default function HomePage() {
           }}
         >
           {/* ── 1. Centered Top Header Zone ────────────────────────── */}
-          <div className="imax-hero-header" style={{ pointerEvents: 'auto' }}>
+          <div className="imax-hero-header" style={{ pointerEvents: 'none' }}>
             {/* Micro Status Chip */}
-            <div style={{ marginBottom: '14px' }}>
+            <div style={{ marginBottom: '14px', pointerEvents: 'none' }}>
               <span
                 className="chip"
                 style={{
@@ -669,6 +722,7 @@ export default function HomePage() {
                   letterSpacing: '0.04em',
                   backdropFilter: 'blur(12px)',
                   WebkitBackdropFilter: 'blur(12px)',
+                  pointerEvents: 'none',
                 }}
               >
                 <span
@@ -679,6 +733,7 @@ export default function HomePage() {
                     background: '#10B981',
                     display: 'inline-block',
                     boxShadow: '0 0 8px #10B981',
+                    pointerEvents: 'none',
                   }}
                 />
                 AVAILABLE FOR Q4 PROJECTS // WORLDWIDE REMOTE
@@ -698,15 +753,17 @@ export default function HomePage() {
                 marginBottom: '14px',
                 color: 'var(--text-primary)',
                 textShadow: '0 4px 24px rgba(0,0,0,0.7)',
+                pointerEvents: 'none',
               }}
             >
-              <span>I Ship Products </span>
+              <span style={{ pointerEvents: 'none' }}>I Ship Products </span>
               <span
                 className="gradient-text"
                 style={{
                   background: 'linear-gradient(135deg, #6B5EE4 0%, #38BDF8 60%, #FF6B6B 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
+                  pointerEvents: 'none',
                 }}
               >
                 That Scale.
@@ -724,6 +781,7 @@ export default function HomePage() {
                 color: 'var(--text-secondary)',
                 letterSpacing: '-0.01em',
                 textShadow: '0 2px 12px rgba(0,0,0,0.8)',
+                pointerEvents: 'none',
               }}
             >
               Senior Full-Stack &amp; AI Systems Architect. Custom web applications, resilient backend architectures, and intelligent LLM workflows designed for modern businesses.
@@ -733,10 +791,10 @@ export default function HomePage() {
           {/* ── 2. Floating Flank HUD Panels (Left & Right Wings) ───── */}
           <div className="imax-stage-arena" style={{ pointerEvents: 'none' }}>
             {/* Left Flank: System Telemetry Cards */}
-            <div className="imax-telemetry-col" style={{ pointerEvents: 'auto' }}>
+            <div className="imax-telemetry-col" style={{ pointerEvents: 'none' }}>
               {/* Telemetry Card 1 */}
-              <div className="imax-telemetry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', pointerEvents: 'none' }}>
                   <div
                     style={{
                       width: '32px',
@@ -749,11 +807,12 @@ export default function HomePage() {
                       justifyContent: 'center',
                       color: 'var(--accent-2)',
                       flexShrink: 0,
+                      pointerEvents: 'none',
                     }}
                   >
                     <FiShield size={16} />
                   </div>
-                  <div>
+                  <div style={{ pointerEvents: 'none' }}>
                     <div
                       style={{
                         fontFamily: 'var(--font-mono)',
@@ -761,23 +820,24 @@ export default function HomePage() {
                         color: 'var(--text-muted)',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
+                        pointerEvents: 'none',
                       }}
                     >
                       SYSTEM BOUNDARIES
                     </div>
-                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', pointerEvents: 'none' }}>
                       Audit: 100% Secure
                     </div>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
                   Zero logic vulnerabilities. End-to-end hardened authentication &amp; data isolation.
                 </p>
               </div>
 
               {/* Telemetry Card 2 */}
-              <div className="imax-telemetry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', pointerEvents: 'none' }}>
                   <div
                     style={{
                       width: '32px',
@@ -790,11 +850,12 @@ export default function HomePage() {
                       justifyContent: 'center',
                       color: 'var(--accent-light)',
                       flexShrink: 0,
+                      pointerEvents: 'none',
                     }}
                   >
                     <FiCpu size={16} />
                   </div>
-                  <div>
+                  <div style={{ pointerEvents: 'none' }}>
                     <div
                       style={{
                         fontFamily: 'var(--font-mono)',
@@ -802,16 +863,17 @@ export default function HomePage() {
                         color: 'var(--text-muted)',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
+                        pointerEvents: 'none',
                       }}
                     >
                       INTELLIGENT AGENTS
                     </div>
-                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', pointerEvents: 'none' }}>
                       AI Workflow: Active
                     </div>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
                   Automated reasoning, tool-use loops, and streaming LLM production pipelines.
                 </p>
               </div>
@@ -832,11 +894,11 @@ export default function HomePage() {
             </div>
 
             {/* Right Flank: Social Proof & Metrics */}
-            <div className="imax-telemetry-col" style={{ pointerEvents: 'auto' }}>
+            <div className="imax-telemetry-col" style={{ pointerEvents: 'none' }}>
               {/* Proof Card 1 */}
-              <div className="imax-telemetry-card">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', pointerEvents: 'none' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
                     {['1', '2', '3', '4', '5'].map((idx, index) => (
                       <div
                         key={idx}
@@ -850,6 +912,7 @@ export default function HomePage() {
                           marginLeft: index > 0 ? '-9px' : '0',
                           boxShadow: 'var(--shadow-sm)',
                           zIndex: 10 - index,
+                          pointerEvents: 'none',
                         }}
                       >
                         <Image
@@ -857,29 +920,29 @@ export default function HomePage() {
                           alt={`Client Avatar ${idx}`}
                           fill
                           sizes="30px"
-                          style={{ objectFit: 'cover' }}
+                          style={{ objectFit: 'cover', pointerEvents: 'none' }}
                         />
                       </div>
                     ))}
                   </div>
-                  <div style={{ display: 'flex', gap: '2px' }}>
+                  <div style={{ display: 'flex', gap: '2px', pointerEvents: 'none' }}>
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <FiStar key={s} size={12} fill="#F4C430" stroke="#F4C430" />
+                      <FiStar key={s} size={12} fill="#F4C430" stroke="#F4C430" style={{ pointerEvents: 'none' }} />
                     ))}
                   </div>
                 </div>
-                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '2px' }}>
+                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '2px', pointerEvents: 'none' }}>
                   5.0 Client Rating
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
                   Trusted by venture-backed founders &amp; senior product leaders worldwide.
                 </p>
               </div>
 
               {/* Proof Card 2 */}
-              <div className="imax-telemetry-card">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <div>
+              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
+                  <div style={{ pointerEvents: 'none' }}>
                     <div
                       style={{
                         fontFamily: 'var(--font-heading)',
@@ -887,16 +950,17 @@ export default function HomePage() {
                         fontWeight: 800,
                         color: 'var(--text-primary)',
                         lineHeight: 1,
+                        pointerEvents: 'none',
                       }}
                     >
                       12+
                     </div>
-                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-2)', fontFamily: 'var(--font-mono)', marginTop: '4px' }}>
+                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-2)', fontFamily: 'var(--font-mono)', marginTop: '4px', pointerEvents: 'none' }}>
                       SHIPPED APPS
                     </div>
                   </div>
-                  <div style={{ width: '1px', height: '36px', background: 'var(--border)' }} />
-                  <div>
+                  <div style={{ width: '1px', height: '36px', background: 'var(--border)', pointerEvents: 'none' }} />
+                  <div style={{ pointerEvents: 'none' }}>
                     <div
                       style={{
                         fontFamily: 'var(--font-heading)',
@@ -904,16 +968,17 @@ export default function HomePage() {
                         fontWeight: 800,
                         color: 'var(--text-primary)',
                         lineHeight: 1,
+                        pointerEvents: 'none',
                       }}
                     >
                       5+
                     </div>
-                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-warm)', fontFamily: 'var(--font-mono)', marginTop: '4px' }}>
+                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-warm)', fontFamily: 'var(--font-mono)', marginTop: '4px', pointerEvents: 'none' }}>
                       YEARS EXP.
                     </div>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', margin: '8px 0 0 0', lineHeight: 1.45 }}>
+                <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', margin: '8px 0 0 0', lineHeight: 1.45, pointerEvents: 'none' }}>
                   High-concurrency systems deployed into production environments.
                 </p>
               </div>
