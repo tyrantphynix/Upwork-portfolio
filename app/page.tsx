@@ -615,7 +615,8 @@ export default function HomePage() {
         id="hero"
         style={{
           position: 'relative',
-          minHeight: 'calc(100vh - var(--nav-height))',
+          marginTop: 'calc(-1 * var(--nav-height))',
+          minHeight: '100vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -696,8 +697,8 @@ export default function HomePage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-between',
-            minHeight: 'calc(100vh - var(--nav-height) - 40px)',
-            paddingTop: '20px',
+            minHeight: 'calc(100vh - 40px)',
+            paddingTop: 'calc(var(--nav-height) + 16px)',
             paddingBottom: '24px',
           }}
         >
