@@ -537,7 +537,6 @@ const testimonials = [
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   // Progressive loading & Reduced motion accessibility states
@@ -568,11 +567,6 @@ export default function HomePage() {
         duration: 1,
         ease: 'power4.out',
       })
-        .from(
-          subRef.current,
-          { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        )
         .from(
           ctaRef.current,
           { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' },
@@ -664,7 +658,7 @@ export default function HomePage() {
               title="Interactive 3D Robot Hero Canvas"
               style={{
                 width: '100%',
-                height: 'calc(100% + 50px)',
+                height: 'calc(100% + 120px)',
                 border: 'none',
                 background: 'transparent',
                 pointerEvents: 'auto',
@@ -746,36 +740,32 @@ export default function HomePage() {
                 pointerEvents: 'none',
               }}
             >
-              <span style={{ pointerEvents: 'none' }}>I Ship Products </span>
-              <span
+              <span style={{ pointerEvents: 'none' }}>I </span>
+              <TypeAnimation
+                sequence={[
+                  'Build Products That Scale.',
+                  2000,
+                  'Ship AI Systems.',
+                  2000,
+                  'Write Scalable Code.',
+                  2000,
+                  'Create SaaS Experiences.',
+                  2000,
+                ]}
+                wrapper="span"
+                cursor={true}
+                repeat={Infinity}
+                preRenderFirstString={true}
                 className="gradient-text"
                 style={{
                   background: 'linear-gradient(135deg, #6B5EE4 0%, #38BDF8 60%, #FF6B6B 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
+                  display: 'inline-block',
                   pointerEvents: 'none',
                 }}
-              >
-                That Scale.
-              </span>
+              />
             </h1>
-
-            {/* Positioning & Tagline */}
-            <p
-              ref={subRef}
-              style={{
-                fontSize: 'clamp(0.92rem, 1.1vw, 1.05rem)',
-                maxWidth: '640px',
-                margin: '0 auto',
-                lineHeight: 1.6,
-                color: 'var(--text-secondary)',
-                letterSpacing: '-0.01em',
-                textShadow: '0 2px 12px rgba(0,0,0,0.8)',
-                pointerEvents: 'none',
-              }}
-            >
-              Senior Full-Stack &amp; AI Systems Architect. Custom web applications, resilient backend architectures, and intelligent LLM workflows designed for modern businesses.
-            </p>
           </div>
 
           {/* ── 2. Floating Flank HUD Panels (Left & Right Wings) ───── */}
