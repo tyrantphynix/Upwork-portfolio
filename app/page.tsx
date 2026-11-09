@@ -646,7 +646,7 @@ export default function HomePage() {
           }}
         />
 
-        {/* ── Fullscreen Interactive 3D Spline Robot Canvas (Loaded progressively) ── */}
+        {/* ── Fullscreen Interactive 3D Spline Robot Canvas ── */}
         {!prefersReducedMotion && (
           <div
             style={{
@@ -657,14 +657,11 @@ export default function HomePage() {
               zIndex: 2,
               pointerEvents: 'auto',
               overflow: 'hidden',
-              opacity: splineLoaded ? 1 : 0,
-              transition: 'opacity 0.8s ease',
             }}
           >
             <iframe
               src="https://my.spline.design/robotfollowcursorforlandingpage-W46xmVWmgF3Jk3tRP40IX7Wh/"
               title="Interactive 3D Robot Hero Canvas"
-              onLoad={() => setSplineLoaded(true)}
               style={{
                 width: '100%',
                 height: 'calc(100% + 50px)',
