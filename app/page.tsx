@@ -651,7 +651,6 @@ export default function HomePage() {
               zIndex: 2,
               pointerEvents: 'auto',
               overflow: 'hidden',
-              clipPath: 'inset(0 0 54px 0)',
             }}
           >
             <iframe
@@ -659,7 +658,8 @@ export default function HomePage() {
               title="Interactive 3D Robot Hero Canvas"
               style={{
                 width: '100%',
-                height: '100%',
+                height: 'calc(100% + 120px)',
+                marginTop: '-60px',
                 border: 'none',
                 background: 'transparent',
                 pointerEvents: 'auto',
@@ -668,20 +668,6 @@ export default function HomePage() {
             />
           </div>
         )}
-
-        {/* ── Bottom Edge Seamless Blend (Zero Watermark on Scroll) ── */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '56px',
-            background: 'linear-gradient(to bottom, transparent, #000000 85%)',
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
 
         {/* ── Floating HUD Interface Layers (Directly on top of 3D Canvas) ── */}
         <div
