@@ -297,28 +297,70 @@ strong {
   width: 100%;
 }
 
-.imax-telemetry-card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 8px 4px;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+.imax-telemetry-col.left-flank {
+  align-items: flex-start;
+}
+
+.imax-telemetry-col.right-flank {
+  align-items: flex-end;
+}
+
+/* ── HUD Micro-Pills (Compact Interactive Telemetry) ── */
+.hud-micro-pill {
+  background: rgba(18, 18, 35, 0.50);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 8px 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+  pointer-events: auto;
+  max-width: 290px;
+  width: fit-content;
 }
 
-[data-theme="light"] .imax-telemetry-card {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
+[data-theme="light"] .hud-micro-pill {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.08);
 }
 
-.imax-telemetry-card:hover {
-  transform: none;
-  box-shadow: none;
+.hud-micro-pill:hover,
+.hud-micro-pill:focus-visible {
+  background: rgba(22, 22, 45, 0.88);
+  border-color: rgba(107, 94, 228, 0.5);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 20px rgba(107, 94, 228, 0.22);
+  transform: translateY(-2px);
+}
+
+[data-theme="light"] .hud-micro-pill:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14);
+}
+
+.hud-micro-pill-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-micro-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.hud-micro-pill:hover .hud-micro-details,
+.hud-micro-pill:focus-visible .hud-micro-details {
+  max-height: 100px;
+  opacity: 1;
+  margin-top: 8px;
 }
 
 .imax-hero-ctas {
@@ -341,6 +383,14 @@ strong {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
+  }
+  .imax-telemetry-col.left-flank,
+  .imax-telemetry-col.right-flank {
+    align-items: stretch;
+  }
+  .hud-micro-pill {
+    max-width: 100%;
+    width: 100%;
   }
 }
 

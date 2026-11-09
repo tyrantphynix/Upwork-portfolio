@@ -651,6 +651,7 @@ export default function HomePage() {
               zIndex: 2,
               pointerEvents: 'auto',
               overflow: 'hidden',
+              clipPath: 'inset(0 0 54px 0)',
             }}
           >
             <iframe
@@ -658,7 +659,7 @@ export default function HomePage() {
               title="Interactive 3D Robot Hero Canvas"
               style={{
                 width: '100%',
-                height: 'calc(100% + 120px)',
+                height: '100%',
                 border: 'none',
                 background: 'transparent',
                 pointerEvents: 'auto',
@@ -667,6 +668,20 @@ export default function HomePage() {
             />
           </div>
         )}
+
+        {/* ── Bottom Edge Seamless Blend (Zero Watermark on Scroll) ── */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '56px',
+            background: 'linear-gradient(to bottom, transparent, #000000 85%)',
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
 
         {/* ── Floating HUD Interface Layers (Directly on top of 3D Canvas) ── */}
         <div
@@ -770,92 +785,92 @@ export default function HomePage() {
 
           {/* ── 2. Floating Flank HUD Panels (Left & Right Wings) ───── */}
           <div className="imax-stage-arena" style={{ pointerEvents: 'none' }}>
-            {/* Left Flank: System Telemetry Cards */}
-            <div className="imax-telemetry-col" style={{ pointerEvents: 'none' }}>
-              {/* Telemetry Card 1 */}
-              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', pointerEvents: 'none' }}>
+            {/* Left Flank: System Telemetry Pills */}
+            <div className="imax-telemetry-col left-flank" style={{ pointerEvents: 'none' }}>
+              {/* HUD Micro-Pill 1: Security */}
+              <div className="hud-micro-pill" tabIndex={0}>
+                <div className="hud-micro-pill-header">
                   <div
                     style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '10px',
-                      background: 'rgba(56, 189, 248, 0.15)',
-                      border: '1px solid rgba(56, 189, 248, 0.3)',
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '8px',
+                      background: 'rgba(56, 189, 248, 0.18)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: 'var(--accent-2)',
                       flexShrink: 0,
-                      pointerEvents: 'none',
                     }}
                   >
-                    <FiShield size={16} />
+                    <FiShield size={13} />
                   </div>
-                  <div style={{ pointerEvents: 'none' }}>
-                    <div
+                  <div>
+                    <span
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '0.6rem',
-                        color: 'var(--text-muted)',
+                        fontSize: '0.58rem',
+                        color: 'var(--accent-2)',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        pointerEvents: 'none',
+                        marginRight: '6px',
                       }}
                     >
-                      SYSTEM BOUNDARIES
-                    </div>
-                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', pointerEvents: 'none' }}>
-                      Audit: 100% Secure
-                    </div>
+                      SECURE
+                    </span>
+                    <strong style={{ fontSize: '0.80rem', color: 'var(--text-primary)' }}>
+                      Audit 100%
+                    </strong>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
-                  Zero logic vulnerabilities. End-to-end hardened authentication &amp; data isolation.
-                </p>
+                <div className="hud-micro-details">
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                    Zero logic vulnerabilities. Hardened auth &amp; data isolation.
+                  </p>
+                </div>
               </div>
 
-              {/* Telemetry Card 2 */}
-              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', pointerEvents: 'none' }}>
+              {/* HUD Micro-Pill 2: AI Agents */}
+              <div className="hud-micro-pill" tabIndex={0}>
+                <div className="hud-micro-pill-header">
                   <div
                     style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '10px',
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '8px',
                       background: 'var(--accent-soft)',
-                      border: '1px solid var(--accent-mid)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: 'var(--accent-light)',
                       flexShrink: 0,
-                      pointerEvents: 'none',
                     }}
                   >
-                    <FiCpu size={16} />
+                    <FiCpu size={13} />
                   </div>
-                  <div style={{ pointerEvents: 'none' }}>
-                    <div
+                  <div>
+                    <span
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: '0.6rem',
-                        color: 'var(--text-muted)',
+                        fontSize: '0.58rem',
+                        color: 'var(--accent-light)',
                         letterSpacing: '0.08em',
                         textTransform: 'uppercase',
-                        pointerEvents: 'none',
+                        marginRight: '6px',
                       }}
                     >
-                      INTELLIGENT AGENTS
-                    </div>
-                    <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', pointerEvents: 'none' }}>
-                      AI Workflow: Active
-                    </div>
+                      AI AGENTS
+                    </span>
+                    <strong style={{ fontSize: '0.80rem', color: 'var(--text-primary)' }}>
+                      Active
+                    </strong>
                   </div>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
-                  Automated reasoning, tool-use loops, and streaming LLM production pipelines.
-                </p>
+                <div className="hud-micro-details">
+                  <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+                    Automated reasoning, tool loops &amp; streaming LLM pipelines.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -874,93 +889,80 @@ export default function HomePage() {
             </div>
 
             {/* Right Flank: Social Proof & Metrics */}
-            <div className="imax-telemetry-col" style={{ pointerEvents: 'none' }}>
-              {/* Proof Card 1 */}
-              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', pointerEvents: 'none' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
-                    {['1', '2', '3', '4', '5'].map((idx, index) => (
-                      <div
-                        key={idx}
-                        style={{
-                          position: 'relative',
-                          width: '28px',
-                          height: '28px',
-                          borderRadius: '8px',
-                          overflow: 'hidden',
-                          border: '2px solid var(--bg)',
-                          marginLeft: index > 0 ? '-9px' : '0',
-                          boxShadow: 'var(--shadow-sm)',
-                          zIndex: 10 - index,
-                          pointerEvents: 'none',
-                        }}
-                      >
-                        <Image
-                          src={`/images/client_avatar_${idx}.png`}
-                          alt={`Client Avatar ${idx}`}
-                          fill
-                          sizes="30px"
-                          style={{ objectFit: 'cover', pointerEvents: 'none' }}
-                        />
-                      </div>
-                    ))}
+            <div className="imax-telemetry-col right-flank" style={{ pointerEvents: 'none' }}>
+              {/* HUD Micro-Pill 3: Client Rating */}
+              <div className="hud-micro-pill" tabIndex={0}>
+                <div className="hud-micro-pill-header">
+                  <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
+                    <FiStar size={13} fill="#F4C430" stroke="#F4C430" />
                   </div>
-                  <div style={{ display: 'flex', gap: '2px', pointerEvents: 'none' }}>
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <FiStar key={s} size={12} fill="#F4C430" stroke="#F4C430" style={{ pointerEvents: 'none' }} />
-                    ))}
+                  <div>
+                    <strong style={{ fontSize: '0.80rem', color: 'var(--text-primary)' }}>
+                      5.0 Rating
+                    </strong>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.58rem',
+                        color: 'var(--text-muted)',
+                        letterSpacing: '0.06em',
+                        marginLeft: '6px',
+                      }}
+                    >
+                      // VERIFIED
+                    </span>
                   </div>
                 </div>
-                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '2px', pointerEvents: 'none' }}>
-                  5.0 Client Rating
+                <div className="hud-micro-details">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      {['1', '2', '3', '4', '5'].map((idx, index) => (
+                        <div
+                          key={idx}
+                          style={{
+                            position: 'relative',
+                            width: '20px',
+                            height: '20px',
+                            borderRadius: '6px',
+                            overflow: 'hidden',
+                            border: '1.5px solid var(--bg)',
+                            marginLeft: index > 0 ? '-6px' : '0',
+                            zIndex: 10 - index,
+                          }}
+                        >
+                          <Image
+                            src={`/images/client_avatar_${idx}.png`}
+                            alt={`Client ${idx}`}
+                            fill
+                            sizes="20px"
+                            style={{ objectFit: 'cover' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <p style={{ fontSize: '0.70rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.35 }}>
+                    Trusted by venture-backed founders worldwide.
+                  </p>
                 </div>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.45, pointerEvents: 'none' }}>
-                  Trusted by venture-backed founders &amp; senior product leaders worldwide.
-                </p>
               </div>
 
-              {/* Proof Card 2 */}
-              <div className="imax-telemetry-card" style={{ pointerEvents: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', pointerEvents: 'none' }}>
-                  <div style={{ pointerEvents: 'none' }}>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.45rem',
-                        fontWeight: 800,
-                        color: 'var(--text-primary)',
-                        lineHeight: 1,
-                        pointerEvents: 'none',
-                      }}
-                    >
-                      12+
-                    </div>
-                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-2)', fontFamily: 'var(--font-mono)', marginTop: '4px', pointerEvents: 'none' }}>
-                      SHIPPED APPS
-                    </div>
-                  </div>
-                  <div style={{ width: '1px', height: '36px', background: 'var(--border)', pointerEvents: 'none' }} />
-                  <div style={{ pointerEvents: 'none' }}>
-                    <div
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.45rem',
-                        fontWeight: 800,
-                        color: 'var(--text-primary)',
-                        lineHeight: 1,
-                        pointerEvents: 'none',
-                      }}
-                    >
-                      5+
-                    </div>
-                    <div style={{ fontSize: '0.66rem', color: 'var(--accent-warm)', fontFamily: 'var(--font-mono)', marginTop: '4px', pointerEvents: 'none' }}>
-                      YEARS EXP.
-                    </div>
-                  </div>
+              {/* HUD Micro-Pill 4: Shipped & Experience */}
+              <div className="hud-micro-pill" tabIndex={0}>
+                <div className="hud-micro-pill-header">
+                  <strong style={{ fontSize: '0.80rem', color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                    12+ Apps
+                  </strong>
+                  <span style={{ color: 'var(--border-strong)', fontSize: '0.75rem' }}>•</span>
+                  <strong style={{ fontSize: '0.80rem', color: 'var(--accent-warm)', fontFamily: 'var(--font-mono)' }}>
+                    5+ Yrs
+                  </strong>
                 </div>
-                <p style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', margin: '8px 0 0 0', lineHeight: 1.45, pointerEvents: 'none' }}>
-                  High-concurrency systems deployed into production environments.
-                </p>
+                <div className="hud-micro-details">
+                  <p style={{ fontSize: '0.70rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.35 }}>
+                    High-concurrency systems deployed into production environments.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
