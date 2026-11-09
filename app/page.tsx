@@ -624,7 +624,7 @@ export default function HomePage() {
           backgroundColor: '#000000',
         }}
       >
-        {/* ── Progressive Loading Instant Poster Frame (Renders in 0ms) ── */}
+        {/* ── Progressive Loading Instant Ambient Backdrop (Zero Text Ghosting) ── */}
         <div
           style={{
             position: 'absolute',
@@ -639,20 +639,12 @@ export default function HomePage() {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: '#000000',
+            backgroundImage: `
+              radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
+              radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%)
+            `,
           }}
-        >
-          <Image
-            src="/images/robot_poster.jpg"
-            alt="Chirag Robot AI Architect"
-            fill
-            priority
-            sizes="100vw"
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center center',
-            }}
-          />
-        </div>
+        />
 
         {/* ── Fullscreen Interactive 3D Spline Robot Canvas (Loaded progressively) ── */}
         {!prefersReducedMotion && (
