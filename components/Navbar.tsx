@@ -264,8 +264,8 @@ export default function Navbar() {
               </div>
 
               {/* Right-most controls: Theme Toggle + Contact button + hamburger */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, pointerEvents: 'none' }}>
-                {/* Luxury Lamp Theme Toggle */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0, pointerEvents: 'none', position: 'relative', overflow: 'visible' }}>
+                {/* Luxury Hanging Pendant Lamp Theme Toggle */}
                 <LampToggle theme={theme} onToggle={toggleTheme} />
 
                 {/* Contact — hidden on mobile via CSS */}

@@ -651,6 +651,8 @@ export default function HomePage() {
               zIndex: 2,
               pointerEvents: 'auto',
               overflow: 'hidden',
+              maskImage: 'radial-gradient(ellipse 75% 68% at 50% 50%, black 45%, transparent 88%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 75% 68% at 50% 50%, black 45%, transparent 88%)',
             }}
           >
             <iframe
