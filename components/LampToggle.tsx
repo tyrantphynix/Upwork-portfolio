@@ -15,7 +15,9 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPulling(true);
-    setTimeout(() => setIsPulling(false), 500);
+    setTimeout(() => {
+      setIsPulling(false);
+    }, 120);
     onToggle();
   };
 
@@ -23,7 +25,9 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       setIsPulling(true);
-      setTimeout(() => setIsPulling(false), 500);
+      setTimeout(() => {
+        setIsPulling(false);
+      }, 120);
       onToggle();
     }
   };
@@ -41,20 +45,19 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
         overflow: 'visible',
       }}
     >
-      <motion.button
+      <button
         type="button"
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         id="nav-lamp-toggle"
         role="button"
         aria-label={`Switch to ${isLight ? 'dark' : 'light'} theme`}
-        title={`Switch to ${isLight ? 'dark' : 'light'} theme (Click to pull)`}
-        whileHover={{ scale: 1.04 }}
+        title={`Switch to ${isLight ? 'dark' : 'light'} theme (Pull cord to switch)`}
         style={{
           position: 'absolute',
           top: '-8px',
           width: '56px',
-          height: '112px',
+          height: '124px',
           background: 'transparent',
           border: 'none',
           padding: 0,
@@ -69,16 +72,8 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
           zIndex: 10,
         }}
       >
-        <motion.div
-          animate={
-            isPulling
-              ? {
-                  y: [0, 8, -3, 1, 0],
-                  rotate: [0, -3.5, 2.5, -1, 0],
-                }
-              : { y: 0, rotate: 0 }
-          }
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+        {/* ── Stationary Lamp Container (Zero movement on click or hover) ── */}
+        <div
           style={{
             position: 'relative',
             width: '100%',
@@ -86,10 +81,9 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            transformOrigin: 'top center',
           }}
         >
-          {/* ── Volumetric Light Cone Glow (Renders behind the lamp when ON) ── */}
+          {/* ── Volumetric Light Cone Glow (Renders stationary behind the lamp when ON) ── */}
           {isLight ? (
             <div
               style={{
@@ -122,11 +116,11 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
             />
           )}
 
-          {/* ── Detailed Hanging Pendant Lamp SVG (SS2 Style) ── */}
+          {/* ── Detailed Hanging Pendant Lamp SVG ── */}
           <svg
             width="56"
-            height="112"
-            viewBox="0 0 56 112"
+            height="124"
+            viewBox="0 0 56 124"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             style={{ overflow: 'visible', zIndex: 1 }}
@@ -168,7 +162,7 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               </radialGradient>
             </defs>
 
-            {/* 1. Ceiling Mount Bracket */}
+            {/* 1. Ceiling Mount Bracket (Stationary) */}
             <rect
               x="22"
               y="0"
@@ -178,12 +172,12 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               fill={isLight ? '#475569' : '#2D2D46'}
             />
 
-            {/* 2. Suspension Chain (Multiple Metallic Spherical Links as in SS2) */}
+            {/* 2. Suspension Chain (Stationary) */}
             <circle cx="28" cy="6" r="2.2" fill="url(#chainBeadGrad)" />
             <circle cx="28" cy="11.5" r="2.2" fill="url(#chainBeadGrad)" />
             <circle cx="28" cy="17" r="2.2" fill="url(#chainBeadGrad)" />
 
-            {/* 3. Shade Top Socket Cap */}
+            {/* 3. Shade Top Socket Cap (Stationary) */}
             <rect
               x="24"
               y="18.5"
@@ -195,8 +189,34 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               strokeWidth="0.6"
             />
 
-            {/* 4. Architectural Pendant Cylindrical Shade (SS2 style) */}
-            {/* Top rounded cap */}
+            {/* 4. Independent Pull-Chain Group with Spring Physics on click */}
+            <motion.g
+              animate={isPulling ? { y: 14 } : { y: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 420,
+                damping: 14,
+                mass: 0.5,
+              }}
+            >
+              {/* Cord starts up at y=32 inside the opaque shade so when pulled down 14px there is zero gap! */}
+              <line
+                x1="28"
+                y1="32"
+                x2="28"
+                y2="88"
+                stroke={isLight ? '#94A3B8' : '#606084'}
+                strokeWidth="1"
+                strokeDasharray="2.2 1.8"
+              />
+
+              {/* Pull Chain Beads at the end */}
+              <circle cx="28" cy="89" r="2.2" fill="url(#chainBeadGrad)" />
+              <circle cx="28" cy="95" r="2.8" fill="url(#pullBeadGrad)" filter="url(#bulbGlow)" />
+              <circle cx="28" cy="101" r="2.2" fill="url(#chainBeadGrad)" />
+            </motion.g>
+
+            {/* 5. Architectural Pendant Cylindrical Shade (Drawn on top of cord origin so cord emerges cleanly) */}
             <path
               d="M 12 28 C 12 23, 44 23, 44 28 L 44 45 C 44 48, 12 48, 12 45 Z"
               fill="url(#pendantShadeGrad)"
@@ -215,7 +235,7 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               strokeLinecap="round"
             />
 
-            {/* 5. Bottom Rim Metallic Bezel Ring */}
+            {/* 6. Bottom Rim Metallic Bezel Ring (Stationary) */}
             <ellipse
               cx="28"
               cy="46"
@@ -226,7 +246,7 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               strokeWidth="1.4"
             />
 
-            {/* 6. Glowing Diffuser Lens (Illuminates when Light is ON) */}
+            {/* 7. Glowing Diffuser Lens (Stationary) */}
             <ellipse
               cx="28"
               cy="46"
@@ -235,25 +255,9 @@ export default function LampToggle({ theme, onToggle }: LampToggleProps) {
               fill={isLight ? '#FFFBEB' : '#322E60'}
               filter={isLight ? 'url(#bulbGlow)' : undefined}
             />
-
-            {/* 7. Beaded Pull Chain hanging down from center into the page (SS2 style) */}
-            <line
-              x1="28"
-              y1="48"
-              x2="28"
-              y2="88"
-              stroke={isLight ? '#94A3B8' : '#606084'}
-              strokeWidth="1"
-              strokeDasharray="2.2 1.8"
-            />
-
-            {/* Pull Chain Beads at the end */}
-            <circle cx="28" cy="89" r="2.2" fill="url(#chainBeadGrad)" />
-            <circle cx="28" cy="95" r="2.8" fill="url(#pullBeadGrad)" filter="url(#bulbGlow)" />
-            <circle cx="28" cy="101" r="2.2" fill="url(#chainBeadGrad)" />
           </svg>
-        </motion.div>
-      </motion.button>
+        </div>
+      </button>
     </div>
   );
 }
