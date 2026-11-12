@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
+import { FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import LampToggle from '@/components/LampToggle';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -264,30 +265,8 @@ export default function Navbar() {
 
               {/* Right-most controls: Theme Toggle + Contact button + hamburger */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, pointerEvents: 'none' }}>
-                {/* Theme Toggle Button */}
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.05 }}
-                  onClick={toggleTheme}
-                  id="nav-theme-toggle"
-                  style={{
-                    background: 'none',
-                    border: '1px solid var(--border-strong)',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    padding: '7px 9px',
-                    color: 'var(--text-primary)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'border-color 0.18s ease, background-color 0.18s ease',
-                    pointerEvents: 'auto',
-                  }}
-                  aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                  title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                >
-                  {theme === 'dark' ? <FiSun size={16} color="#F59E0B" /> : <FiMoon size={16} color="#6B5EE4" />}
-                </motion.button>
+                {/* Luxury Lamp Theme Toggle */}
+                <LampToggle theme={theme} onToggle={toggleTheme} />
 
                 {/* Contact — hidden on mobile via CSS */}
                 <Link

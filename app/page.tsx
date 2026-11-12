@@ -615,7 +615,7 @@ export default function HomePage() {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: '#000000',
+          backgroundColor: 'var(--bg)',
         }}
       >
         {/* ── Progressive Loading Instant Ambient Backdrop (Zero Text Ghosting) ── */}
@@ -632,7 +632,7 @@ export default function HomePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#000000',
+            backgroundColor: 'var(--bg)',
             backgroundImage: `
               radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
               radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%)
