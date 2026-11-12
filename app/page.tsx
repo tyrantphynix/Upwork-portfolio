@@ -615,7 +615,7 @@ export default function HomePage() {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: 'var(--bg)',
+          backgroundColor: '#0D0D1A',
         }}
       >
         {/* ── Progressive Loading Instant Ambient Backdrop (Zero Text Ghosting) ── */}
@@ -632,7 +632,7 @@ export default function HomePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'var(--bg)',
+            backgroundColor: '#0D0D1A',
             backgroundImage: `
               radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
               radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%)
@@ -738,7 +738,7 @@ export default function HomePage() {
                 lineHeight: 1.08,
                 letterSpacing: '-0.035em',
                 marginBottom: '14px',
-                color: 'var(--text-primary)',
+                color: '#F0F0F8',
                 textShadow: '0 4px 24px rgba(0,0,0,0.7)',
                 pointerEvents: 'none',
               }}
@@ -1012,6 +1012,20 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* ── Theater Exit Architectural Transition Gradient ── */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '72px',
+            background: 'linear-gradient(to bottom, transparent, var(--bg-2))',
+            pointerEvents: 'none',
+            zIndex: 4,
+          }}
+        />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════

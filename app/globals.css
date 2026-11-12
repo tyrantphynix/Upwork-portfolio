@@ -307,7 +307,7 @@ strong {
 
 /* ── HUD Micro-Pills (Compact Interactive Telemetry) ── */
 .hud-micro-pill {
-  background: rgba(18, 18, 35, 0.50);
+  background: rgba(18, 18, 35, 0.60);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: 8px 14px;
@@ -322,24 +322,35 @@ strong {
   width: fit-content;
 }
 
-[data-theme="light"] .hud-micro-pill {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.08);
+/* Inside the dark theater hero, HUD micro-pills ALWAYS maintain luxury obsidian glass */
+.imax-centered-hero .hud-micro-pill,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill {
+  background: rgba(18, 18, 35, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55) !important;
+  color: #F0F0F8 !important;
+}
+
+.imax-centered-hero .hud-micro-pill strong,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill strong {
+  color: #F0F0F8 !important;
+}
+
+.imax-centered-hero .hud-micro-pill p,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill p {
+  color: rgba(240, 240, 248, 0.76) !important;
 }
 
 .hud-micro-pill:hover,
-.hud-micro-pill:focus-visible {
-  background: rgba(22, 22, 45, 0.88);
-  border-color: rgba(107, 94, 228, 0.5);
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 20px rgba(107, 94, 228, 0.22);
+.hud-micro-pill:focus-visible,
+.imax-centered-hero .hud-micro-pill:hover,
+.imax-centered-hero .hud-micro-pill:focus-visible,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill:hover,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill:focus-visible {
+  background: rgba(22, 22, 45, 0.90) !important;
+  border-color: rgba(107, 94, 228, 0.5) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.70), 0 0 20px rgba(107, 94, 228, 0.22) !important;
   transform: translateY(-2px);
-}
-
-[data-theme="light"] .hud-micro-pill:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: var(--accent);
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14);
 }
 
 .hud-micro-pill-header {
@@ -370,6 +381,38 @@ strong {
   gap: 14px;
   flex-wrap: wrap;
   position: relative;
+  z-index: 2;
+}
+
+/* Inside the dark theater hero, CTAs always stay high-contrast against dark background */
+.imax-hero-ctas .btn-outline,
+[data-theme="light"] .imax-hero-ctas .btn-outline {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.20) !important;
+  background: rgba(20, 20, 42, 0.50) !important;
+}
+
+.imax-hero-ctas .btn-outline:hover,
+[data-theme="light"] .imax-hero-ctas .btn-outline:hover {
+  background: rgba(107, 94, 228, 0.25) !important;
+  border-color: var(--accent) !important;
+  color: #FFFFFF !important;
+}
+
+/* When transparent at the top of the dark hero canvas, nav items stay crisp white */
+.nav-pill-wrapper:not(.is-scrolled) #nav-logo,
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) #nav-logo {
+  color: #FFFFFF !important;
+}
+.nav-pill-wrapper:not(.is-scrolled) .nav-link-item,
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+.nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover,
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover {
+  color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
   z-index: 2;
 }
 
