@@ -908,7 +908,7 @@ export default function HomePage() {
                             height: '20px',
                             borderRadius: '6px',
                             overflow: 'hidden',
-                            border: '1.5px solid var(--bg)',
+                            border: '1.5px solid rgba(255, 255, 255, 0.45)',
                             marginLeft: index > 0 ? '-6px' : '0',
                             zIndex: 10 - index,
                           }}

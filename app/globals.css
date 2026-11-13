@@ -296,11 +296,14 @@ strong {
   text-shadow: none !important;
 }
 
-/* ── Light mode status chip: refined green on light bg ── */
+/* ── Light mode status chip: frosted glass green ── */
 [data-theme="light"] .hero-status-chip {
-  background: rgba(16, 185, 129, 0.08) !important;
-  border-color: rgba(16, 185, 129, 0.28) !important;
+  background: rgba(255, 255, 255, 0.28) !important;
+  border-color: rgba(16, 185, 129, 0.35) !important;
   color: #047857 !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
 }
 
 .imax-hero-header {
@@ -316,12 +319,12 @@ strong {
 
 .imax-stage-arena {
   display: grid;
-  grid-template-columns: minmax(230px, 300px) auto minmax(230px, 300px);
+  grid-template-columns: minmax(260px, 340px) auto minmax(260px, 340px);
   align-items: center;
   justify-content: space-between;
-  gap: clamp(32px, 5.5vw, 92px);
+  gap: clamp(24px, 4.5vw, 72px);
   width: 100%;
-  max-width: 1320px;
+  max-width: 1360px;
   margin: clamp(14px, 2vh, 28px) auto;
   position: relative;
   z-index: 2;
@@ -342,28 +345,25 @@ strong {
   align-items: flex-end;
 }
 
-/* ── HUD Micro-Pills (Compact Interactive Telemetry) ── */
+/* ── HUD Telemetry Cards (Full Original Size with Frosted Glass) ── */
 .hud-micro-pill {
-  background: rgba(18, 18, 35, 0.60);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  padding: 8px 14px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+  border-radius: 18px;
+  padding: 14px 18px;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   cursor: pointer;
   pointer-events: auto;
-  max-width: 290px;
-  width: fit-content;
+  max-width: 330px;
+  width: 100%;
 }
 
-/* ── Dark mode: obsidian glass HUD pills ── */
+/* ── Dark mode: luxury obsidian frosted glass ── */
 .imax-centered-hero .hud-micro-pill {
-  background: rgba(18, 18, 35, 0.65) !important;
+  background: rgba(18, 18, 35, 0.48) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55) !important;
+  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   color: #F0F0F8 !important;
 }
 .imax-centered-hero .hud-micro-pill strong {
@@ -374,30 +374,32 @@ strong {
 }
 .imax-centered-hero .hud-micro-pill:hover,
 .imax-centered-hero .hud-micro-pill:focus-visible {
-  background: rgba(22, 22, 45, 0.90) !important;
-  border-color: rgba(107, 94, 228, 0.5) !important;
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.70), 0 0 20px rgba(107, 94, 228, 0.22) !important;
+  background: rgba(24, 24, 48, 0.70) !important;
+  border-color: rgba(107, 94, 228, 0.55) !important;
+  box-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.75), 0 0 24px rgba(107, 94, 228, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
   transform: translateY(-2px);
 }
 
-/* ── Light mode: white frosted glass HUD pills ── */
+/* ── Light mode: luminous frosted glass (seamless blending over dark center / light edges) ── */
 [data-theme="light"] .imax-centered-hero .hud-micro-pill {
-  background: rgba(255, 255, 255, 0.88) !important;
-  border: 1px solid rgba(107, 94, 228, 0.18) !important;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(107, 94, 228, 0.07) !important;
+  background: rgba(255, 255, 255, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
   color: #0D0D1A !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill strong {
   color: #0D0D1A !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill p {
-  color: rgba(13, 13, 26, 0.65) !important;
+  color: rgba(13, 13, 26, 0.72) !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill:hover,
 [data-theme="light"] .imax-centered-hero .hud-micro-pill:focus-visible {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border-color: rgba(107, 94, 228, 0.40) !important;
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14), 0 0 20px rgba(107, 94, 228, 0.14) !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-color: rgba(107, 94, 228, 0.45) !important;
+  box-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.12), 0 0 22px rgba(107, 94, 228, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
   transform: translateY(-2px);
 }
 
@@ -412,19 +414,13 @@ strong {
   gap: 10px;
 }
 
+/* Full original size details: visible by default */
 .hud-micro-details {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin-top 0.3s ease;
-  margin-top: 0;
-}
-
-.hud-micro-pill:hover .hud-micro-details,
-.hud-micro-pill:focus-visible .hud-micro-details {
-  max-height: 100px;
-  opacity: 1;
+  max-height: 120px;
+  opacity: 0.96;
+  overflow: visible;
   margin-top: 8px;
+  transition: opacity 0.25s ease;
 }
 
 .imax-hero-ctas {
@@ -437,11 +433,27 @@ strong {
   z-index: 2;
 }
 
-/* ── Dark mode CTAs: white text on dark hero ── */
+/* ── Dark mode CTAs: frosted glass action bar ── */
+.imax-hero-ctas .btn {
+  border-radius: 9999px;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+.imax-hero-ctas .btn-dark {
+  background: rgba(20, 20, 42, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+.imax-hero-ctas .btn-dark:hover {
+  background: rgba(107, 94, 228, 0.35) !important;
+  border-color: var(--accent) !important;
+}
 .imax-hero-ctas .btn-outline {
   color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.20) !important;
-  background: rgba(20, 20, 42, 0.50) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(20, 20, 42, 0.40) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
 }
 .imax-hero-ctas .btn-outline:hover {
   background: rgba(107, 94, 228, 0.25) !important;
@@ -449,14 +461,30 @@ strong {
   color: #FFFFFF !important;
 }
 
-/* ── Light mode CTAs: dark text on light hero ── */
+/* ── Light mode CTAs: luminous frosted glass action bar ── */
+[data-theme="light"] .imax-hero-ctas .btn {
+  border-radius: 9999px;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+[data-theme="light"] .imax-hero-ctas .btn-dark {
+  background: rgba(13, 13, 26, 0.80) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+[data-theme="light"] .imax-hero-ctas .btn-dark:hover {
+  background: rgba(107, 94, 228, 0.90) !important;
+  border-color: var(--accent) !important;
+}
 [data-theme="light"] .imax-hero-ctas .btn-outline {
   color: #0D0D1A !important;
-  border-color: rgba(13, 13, 26, 0.18) !important;
-  background: rgba(255, 255, 255, 0.80) !important;
+  border-color: rgba(255, 255, 255, 0.50) !important;
+  background: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
 }
 [data-theme="light"] .imax-hero-ctas .btn-outline:hover {
-  background: rgba(107, 94, 228, 0.10) !important;
+  background: rgba(255, 255, 255, 0.45) !important;
   border-color: var(--accent) !important;
   color: var(--accent) !important;
 }
