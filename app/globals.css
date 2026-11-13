@@ -296,14 +296,15 @@ strong {
   text-shadow: none !important;
 }
 
-/* ── Light mode status chip: frosted glass green ── */
+/* ── Light mode status chip: sheer transparent glass green ── */
 [data-theme="light"] .hero-status-chip {
-  background: rgba(255, 255, 255, 0.28) !important;
-  border-color: rgba(16, 185, 129, 0.35) !important;
-  color: #047857 !important;
-  backdrop-filter: blur(16px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(16, 185, 129, 0.40) !important;
+  color: #10B981 !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
 }
 
 .imax-hero-header {
@@ -357,13 +358,13 @@ strong {
   width: 100%;
 }
 
-/* ── Dark mode: luxury obsidian frosted glass ── */
+/* ── Dark mode: sheer obsidian glass HUD cards ── */
 .imax-centered-hero .hud-micro-pill {
-  background: rgba(18, 18, 35, 0.48) !important;
+  background: rgba(18, 18, 35, 0.35) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
   color: #F0F0F8 !important;
 }
 .imax-centered-hero .hud-micro-pill strong {
@@ -374,32 +375,34 @@ strong {
 }
 .imax-centered-hero .hud-micro-pill:hover,
 .imax-centered-hero .hud-micro-pill:focus-visible {
-  background: rgba(24, 24, 48, 0.70) !important;
+  background: rgba(24, 24, 48, 0.60) !important;
   border-color: rgba(107, 94, 228, 0.55) !important;
   box-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.75), 0 0 24px rgba(107, 94, 228, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
   transform: translateY(-2px);
 }
 
-/* ── Light mode: luminous frosted glass (seamless blending over dark center / light edges) ── */
+/* ── Light mode: true transparent glass (shows half black / half white background directly through) ── */
 [data-theme="light"] .imax-centered-hero .hud-micro-pill {
-  background: rgba(255, 255, 255, 0.28) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
-  box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
-  backdrop-filter: blur(24px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
-  color: #0D0D1A !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.40) !important;
+  backdrop-filter: blur(2px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
+  color: #FFFFFF !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill strong {
-  color: #0D0D1A !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7) !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill p {
-  color: rgba(13, 13, 26, 0.72) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6) !important;
 }
 [data-theme="light"] .imax-centered-hero .hud-micro-pill:hover,
 [data-theme="light"] .imax-centered-hero .hud-micro-pill:focus-visible {
-  background: rgba(255, 255, 255, 0.45) !important;
-  border-color: rgba(107, 94, 228, 0.45) !important;
-  box-shadow: 0 18px 42px -6px rgba(0, 0, 0, 0.12), 0 0 22px rgba(107, 94, 228, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-color: rgba(107, 94, 228, 0.60) !important;
+  box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.35), 0 0 20px rgba(107, 94, 228, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.60) !important;
   transform: translateY(-2px);
 }
 
@@ -436,8 +439,8 @@ strong {
 /* ── Dark mode CTAs: frosted glass action bar ── */
 .imax-hero-ctas .btn {
   border-radius: 9999px;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
 }
 .imax-hero-ctas .btn-dark {
   background: rgba(20, 20, 42, 0.65) !important;
@@ -461,27 +464,33 @@ strong {
   color: #FFFFFF !important;
 }
 
-/* ── Light mode CTAs: luminous frosted glass action bar ── */
+/* ── Light mode CTAs: sheer transparent glass action bar ── */
 [data-theme="light"] .imax-hero-ctas .btn {
   border-radius: 9999px;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
 }
 [data-theme="light"] .imax-hero-ctas .btn-dark {
-  background: rgba(13, 13, 26, 0.80) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(13, 13, 26, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.30) !important;
   color: #FFFFFF !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20) !important;
 }
 [data-theme="light"] .imax-hero-ctas .btn-dark:hover {
-  background: rgba(107, 94, 228, 0.90) !important;
+  background: rgba(107, 94, 228, 0.85) !important;
   border-color: var(--accent) !important;
 }
 [data-theme="light"] .imax-hero-ctas .btn-outline {
-  color: #0D0D1A !important;
-  border-color: rgba(255, 255, 255, 0.50) !important;
-  background: rgba(255, 255, 255, 0.28) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.80) !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+[data-theme="light"] .imax-hero-ctas .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-light) !important;
 }
 [data-theme="light"] .imax-hero-ctas .btn-outline:hover {
   background: rgba(255, 255, 255, 0.45) !important;
