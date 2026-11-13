@@ -615,11 +615,11 @@ export default function HomePage() {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
-          backgroundColor: '#0D0D1A',
         }}
       >
         {/* ── Progressive Loading Instant Ambient Backdrop (Zero Text Ghosting) ── */}
         <div
+          className="hero-loading-backdrop"
           style={{
             position: 'absolute',
             inset: 0,
@@ -632,11 +632,6 @@ export default function HomePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#0D0D1A',
-            backgroundImage: `
-              radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
-              radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%)
-            `,
           }}
         />
 
@@ -693,7 +688,7 @@ export default function HomePage() {
             {/* Micro Status Chip */}
             <div style={{ marginBottom: '14px', pointerEvents: 'none' }}>
               <span
-                className="chip"
+                className="chip hero-status-chip"
                 style={{
                   padding: '6px 16px',
                   fontSize: '0.74rem',

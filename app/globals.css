@@ -257,13 +257,50 @@ strong {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg);
+  background-color: #0D0D1A;
   background-image: 
     radial-gradient(circle at 50% 48%, rgba(107, 94, 228, 0.18) 0%, rgba(243, 126, 126, 0.08) 35%, transparent 68%),
     radial-gradient(circle at 18% 25%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 82% 70%, rgba(107, 94, 228, 0.10) 0%, transparent 50%);
   padding: clamp(24px, 3.5vh, 48px) 0 clamp(32px, 4.5vh, 60px) 0;
   text-align: center;
+  transition: background-color 0.4s ease;
+}
+
+/* ── Light mode hero: pearl white background with soft indigo radials ── */
+[data-theme="light"] .imax-centered-hero {
+  background-color: #F4F4FA;
+  background-image:
+    radial-gradient(circle at 50% 48%, rgba(107, 94, 228, 0.09) 0%, rgba(56, 189, 248, 0.05) 35%, transparent 68%),
+    radial-gradient(circle at 18% 25%, rgba(107, 94, 228, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 82% 70%, rgba(56, 189, 248, 0.06) 0%, transparent 50%);
+}
+
+/* ── Loading backdrop: inherits hero color per theme ── */
+.hero-loading-backdrop {
+  background-color: #0D0D1A;
+  background-image:
+    radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
+    radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+}
+[data-theme="light"] .hero-loading-backdrop {
+  background-color: #F4F4FA;
+  background-image:
+    radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.12) 0%, rgba(56, 189, 248, 0.06) 32%, transparent 65%),
+    radial-gradient(circle at 50% 30%, rgba(107, 94, 228, 0.06) 0%, transparent 50%);
+}
+
+/* ── Light mode hero headline: dark ink text ── */
+[data-theme="light"] .hero-display-text {
+  color: #1A1A2E !important;
+  text-shadow: none !important;
+}
+
+/* ── Light mode status chip: refined green on light bg ── */
+[data-theme="light"] .hero-status-chip {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.28) !important;
+  color: #047857 !important;
 }
 
 .imax-hero-header {
@@ -322,34 +359,50 @@ strong {
   width: fit-content;
 }
 
-/* Inside the dark theater hero, HUD micro-pills ALWAYS maintain luxury obsidian glass */
-.imax-centered-hero .hud-micro-pill,
-[data-theme="light"] .imax-centered-hero .hud-micro-pill {
+/* ── Dark mode: obsidian glass HUD pills ── */
+.imax-centered-hero .hud-micro-pill {
   background: rgba(18, 18, 35, 0.65) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
   box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.55) !important;
   color: #F0F0F8 !important;
 }
-
-.imax-centered-hero .hud-micro-pill strong,
-[data-theme="light"] .imax-centered-hero .hud-micro-pill strong {
+.imax-centered-hero .hud-micro-pill strong {
   color: #F0F0F8 !important;
 }
-
-.imax-centered-hero .hud-micro-pill p,
-[data-theme="light"] .imax-centered-hero .hud-micro-pill p {
+.imax-centered-hero .hud-micro-pill p {
   color: rgba(240, 240, 248, 0.76) !important;
 }
-
-.hud-micro-pill:hover,
-.hud-micro-pill:focus-visible,
 .imax-centered-hero .hud-micro-pill:hover,
-.imax-centered-hero .hud-micro-pill:focus-visible,
-[data-theme="light"] .imax-centered-hero .hud-micro-pill:hover,
-[data-theme="light"] .imax-centered-hero .hud-micro-pill:focus-visible {
+.imax-centered-hero .hud-micro-pill:focus-visible {
   background: rgba(22, 22, 45, 0.90) !important;
   border-color: rgba(107, 94, 228, 0.5) !important;
   box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.70), 0 0 20px rgba(107, 94, 228, 0.22) !important;
+  transform: translateY(-2px);
+}
+
+/* ── Light mode: white frosted glass HUD pills ── */
+[data-theme="light"] .imax-centered-hero .hud-micro-pill {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(107, 94, 228, 0.18) !important;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.10), 0 0 0 1px rgba(107, 94, 228, 0.07) !important;
+  color: #0D0D1A !important;
+}
+[data-theme="light"] .imax-centered-hero .hud-micro-pill strong {
+  color: #0D0D1A !important;
+}
+[data-theme="light"] .imax-centered-hero .hud-micro-pill p {
+  color: rgba(13, 13, 26, 0.65) !important;
+}
+[data-theme="light"] .imax-centered-hero .hud-micro-pill:hover,
+[data-theme="light"] .imax-centered-hero .hud-micro-pill:focus-visible {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(107, 94, 228, 0.40) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14), 0 0 20px rgba(107, 94, 228, 0.14) !important;
+  transform: translateY(-2px);
+}
+
+.hud-micro-pill:hover,
+.hud-micro-pill:focus-visible {
   transform: translateY(-2px);
 }
 
@@ -384,36 +437,52 @@ strong {
   z-index: 2;
 }
 
-/* Inside the dark theater hero, CTAs always stay high-contrast against dark background */
-.imax-hero-ctas .btn-outline,
-[data-theme="light"] .imax-hero-ctas .btn-outline {
+/* ── Dark mode CTAs: white text on dark hero ── */
+.imax-hero-ctas .btn-outline {
   color: #FFFFFF !important;
   border-color: rgba(255, 255, 255, 0.20) !important;
   background: rgba(20, 20, 42, 0.50) !important;
 }
-
-.imax-hero-ctas .btn-outline:hover,
-[data-theme="light"] .imax-hero-ctas .btn-outline:hover {
+.imax-hero-ctas .btn-outline:hover {
   background: rgba(107, 94, 228, 0.25) !important;
   border-color: var(--accent) !important;
   color: #FFFFFF !important;
 }
 
-/* When transparent at the top of the dark hero canvas, nav items stay crisp white */
-.nav-pill-wrapper:not(.is-scrolled) #nav-logo,
-[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) #nav-logo {
+/* ── Light mode CTAs: dark text on light hero ── */
+[data-theme="light"] .imax-hero-ctas .btn-outline {
+  color: #0D0D1A !important;
+  border-color: rgba(13, 13, 26, 0.18) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+}
+[data-theme="light"] .imax-hero-ctas .btn-outline:hover {
+  background: rgba(107, 94, 228, 0.10) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* ── Dark mode navbar (at top, hero is dark): white text ── */
+.nav-pill-wrapper:not(.is-scrolled) #nav-logo {
   color: #FFFFFF !important;
 }
-.nav-pill-wrapper:not(.is-scrolled) .nav-link-item,
-[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item {
+.nav-pill-wrapper:not(.is-scrolled) .nav-link-item {
   color: rgba(255, 255, 255, 0.82) !important;
 }
-.nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover,
-[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover {
+.nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover {
   color: #FFFFFF !important;
   background-color: rgba(255, 255, 255, 0.12) !important;
 }
-  z-index: 2;
+
+/* ── Light mode navbar (at top, hero is now light): dark text ── */
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) #nav-logo {
+  color: #0D0D1A !important;
+}
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item {
+  color: rgba(13, 13, 26, 0.75) !important;
+}
+[data-theme="light"] .nav-pill-wrapper:not(.is-scrolled) .nav-link-item:hover {
+  color: #0D0D1A !important;
+  background-color: rgba(13, 13, 26, 0.07) !important;
 }
 
 @media (max-width: 1040px) {
