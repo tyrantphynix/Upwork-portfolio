@@ -41,10 +41,15 @@
      Syne               : bold architectural heading alt
      DM Sans            : clean premium body text
      JetBrains Mono     : technical labels & code */
-  --font-heading: var(--font-syne), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: var(--font-cormorant), 'Cormorant Garamond', 'Georgia', serif;
-  --font-body: var(--font-dm-sans), 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), 'SFMono-Regular', 'Consolas', monospace;
+  --font-syne: 'Syne', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-dm-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --font-heading: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', 'Consolas', monospace;
 
   /* Spacing */
   --nav-height: 64px;
