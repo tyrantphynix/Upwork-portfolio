@@ -282,6 +282,10 @@ strong {
 }
 
 /* ── Loading backdrop: inherits hero color per theme ── */
+.spline-hero-container canvas {
+  background: transparent !important;
+}
+
 .hero-loading-backdrop {
   background-color: #0D0D1A;
   background-image:

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TypeAnimation } from 'react-type-animation';
@@ -30,6 +31,10 @@ import HeroCenterpiece from '@/components/HeroCenterpiece';
 import { siteConfig } from '@/config/site';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+});
 
 /* ── Data ─────────────────────────────────────────── */
 const services = [
@@ -638,6 +643,7 @@ export default function HomePage() {
         {/* ── Fullscreen Interactive 3D Spline Robot Canvas ── */}
         {!prefersReducedMotion && (
           <div
+            className="spline-hero-container"
             style={{
               position: 'absolute',
               inset: 0,
@@ -646,22 +652,18 @@ export default function HomePage() {
               zIndex: 2,
               pointerEvents: 'auto',
               overflow: 'hidden',
-              maskImage: 'radial-gradient(ellipse 75% 68% at 50% 50%, black 45%, transparent 88%)',
-              WebkitMaskImage: 'radial-gradient(ellipse 75% 68% at 50% 50%, black 45%, transparent 88%)',
             }}
           >
-            <iframe
-              src="https://my.spline.design/robotfollowcursorforlandingpage-W46xmVWmgF3Jk3tRP40IX7Wh/"
-              title="Interactive 3D Robot Hero Canvas"
+            <Spline
+              scene="https://prod.spline.design/PKsi7Y4gBsQxp387/scene.splinecode"
+              onLoad={() => setSplineLoaded(true)}
               style={{
                 width: '100%',
                 height: 'calc(100% + 120px)',
                 marginTop: '-60px',
-                border: 'none',
                 background: 'transparent',
                 pointerEvents: 'auto',
               }}
-              allow="accelerometer; gyroscope"
             />
           </div>
         )}
