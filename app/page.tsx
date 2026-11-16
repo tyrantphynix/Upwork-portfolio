@@ -29,6 +29,7 @@ import {
 import ScrollReveal from '@/components/ScrollReveal';
 import HeroCenterpiece from '@/components/HeroCenterpiece';
 import { siteConfig } from '@/config/site';
+import type { Application } from '@splinetool/runtime';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -547,6 +548,106 @@ export default function HomePage() {
   // Progressive loading & Reduced motion accessibility states
   const [splineLoaded, setSplineLoaded] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark');
+  const splineAppRef = useRef<Application | null>(null);
+  const defaultSpotColorRef = useRef<string | null>(null);
+  const defaultSpotIntensityRef = useRef<number | null>(null);
+  const defaultPlaneColorRef = useRef<string | null>(null);
+
+  const applySplineTheme = (themeName: string, appInstance?: Application | null) => {
+    const spline = appInstance || splineAppRef.current;
+    if (!spline) return;
+
+    try {
+      const spotLight =
+        spline.findObjectByName('Spot Light') ||
+        spline.findObjectByName('SpotLight') ||
+        spline.getAllObjects?.().find((o) => o.name?.toLowerCase().includes('spot') || o.name?.toLowerCase().includes('light'));
+
+      const plane =
+        spline.findObjectByName('Plane') ||
+        spline.getAllObjects?.().find((o) => o.name?.toLowerCase().includes('plane') || o.name?.toLowerCase().includes('floor'));
+
+      // Capture native Spline defaults once on initial load
+      if (spotLight && defaultSpotColorRef.current === null) {
+        defaultSpotColorRef.current = spotLight.color || '#3B82F6';
+        defaultSpotIntensityRef.current = typeof spotLight.intensity === 'number' ? spotLight.intensity : null;
+      }
+      if (plane && defaultPlaneColorRef.current === null) {
+        defaultPlaneColorRef.current = plane.color || null;
+      }
+
+      if (themeName === 'light') {
+        if (spotLight) {
+          // Studio daylight lavender (loved in SS3)
+          spotLight.color = '#E0D8FF';
+          const baseIntensity = defaultSpotIntensityRef.current ?? 1;
+          spotLight.intensity = Math.max(baseIntensity * 1.5, 2.6);
+        }
+        if (plane) {
+          // Keep plane visible to catch real 3D shadow from robot!
+          plane.visible = true;
+          plane.color = '#F4F4FA';
+        }
+        if (typeof (spline as any).setBackgroundColor === 'function') {
+          (spline as any).setBackgroundColor('#F4F4FA');
+        }
+      } else {
+        // Dark Mode: Restore 100% native Spline scene defaults (recovering SS1 blue puddle & face sheen)
+        if (spotLight && defaultSpotColorRef.current !== null) {
+          spotLight.color = defaultSpotColorRef.current;
+          if (defaultSpotIntensityRef.current !== null) {
+            spotLight.intensity = defaultSpotIntensityRef.current;
+          }
+        }
+        if (plane) {
+          plane.visible = true;
+          if (defaultPlaneColorRef.current !== null) {
+            plane.color = defaultPlaneColorRef.current;
+          }
+        }
+        if (typeof (spline as any).setBackgroundColor === 'function') {
+          (spline as any).setBackgroundColor('transparent');
+        }
+      }
+    } catch (err) {
+      console.warn('Spline theme synchronization:', err);
+    }
+  };
+
+  const handleSplineLoad = (splineApp: Application) => {
+    splineAppRef.current = splineApp;
+    setSplineLoaded(true);
+    if (typeof document !== 'undefined') {
+      const activeTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+      setCurrentTheme(activeTheme);
+      applySplineTheme(activeTheme, splineApp);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+    const activeTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+    setCurrentTheme(activeTheme);
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          const newTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'dark';
+          setCurrentTheme(newTheme);
+          applySplineTheme(newTheme);
+        }
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     // Check if user prefers reduced motion (OS accessibility / low power mode)
@@ -656,7 +757,7 @@ export default function HomePage() {
           >
             <Spline
               scene="https://prod.spline.design/PKsi7Y4gBsQxp387/scene.splinecode"
-              onLoad={() => setSplineLoaded(true)}
+              onLoad={handleSplineLoad}
               style={{
                 width: '100%',
                 height: 'calc(100% + 120px)',
