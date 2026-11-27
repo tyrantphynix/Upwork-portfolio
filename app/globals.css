@@ -286,11 +286,17 @@ strong {
   background: transparent !important;
 }
 
-/* Force Spline iframe background to black in dark mode */
-.imax-centered-hero .spline-hero-container,
-.imax-centered-hero .spline-hero-container canvas,
-.imax-centered-hero .spline-hero-container iframe {
+/* Force Spline iframe/canvas background to black in dark mode only */
+html:not([data-theme="light"]) .imax-centered-hero .spline-hero-container,
+html:not([data-theme="light"]) .imax-centered-hero .spline-hero-container canvas,
+html:not([data-theme="light"]) .imax-centered-hero .spline-hero-container iframe {
   background-color: #000000 !important;
+}
+
+[data-theme="light"] .imax-centered-hero .spline-hero-container,
+[data-theme="light"] .imax-centered-hero .spline-hero-container canvas,
+[data-theme="light"] .imax-centered-hero .spline-hero-container iframe {
+  background-color: transparent !important;
 }
 
 .hero-loading-backdrop {

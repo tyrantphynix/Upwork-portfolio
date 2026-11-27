@@ -564,17 +564,24 @@ export default function HomePage() {
         spline.findObjectByName('SpotLight') ||
         spline.getAllObjects?.().find((o) => o.name?.toLowerCase().includes('spot') || o.name?.toLowerCase().includes('light'));
 
-      const plane =
+      const planeDark =
+        spline.findObjectByName('Plane 2') ||
         spline.findObjectByName('Plane') ||
-        spline.getAllObjects?.().find((o) => o.name?.toLowerCase().includes('plane') || o.name?.toLowerCase().includes('floor'));
+        spline.getAllObjects?.().find((o) => o.name?.toLowerCase() === 'plane' || o.name?.toLowerCase() === 'plane 2' || o.name?.toLowerCase().includes('floor'));
+
+      const planeLight =
+        spline.findObjectByName('Plane Light') ||
+        spline.findObjectByName('Plane_Light') ||
+        spline.findObjectByName('Plane Copy') ||
+        spline.getAllObjects?.().find((o) => o.name?.toLowerCase().includes('plane') && o.name !== planeDark?.name);
 
       // Capture native Spline defaults once on initial load
       if (spotLight && defaultSpotColorRef.current === null) {
         defaultSpotColorRef.current = spotLight.color || '#3B82F6';
         defaultSpotIntensityRef.current = typeof spotLight.intensity === 'number' ? spotLight.intensity : null;
       }
-      if (plane && defaultPlaneColorRef.current === null) {
-        defaultPlaneColorRef.current = plane.color || null;
+      if (planeDark && defaultPlaneColorRef.current === null) {
+        defaultPlaneColorRef.current = planeDark.color || null;
       }
 
       if (themeName === 'light') {
@@ -584,26 +591,29 @@ export default function HomePage() {
           const baseIntensity = defaultSpotIntensityRef.current ?? 1;
           spotLight.intensity = Math.max(baseIntensity * 3.5, 5.5);
         }
-        if (plane) {
-          // Keep plane visible to catch real 3D shadow from robot, lit to bright white
-          plane.visible = true;
-          plane.color = '#FFFFFF';
+        if (planeLight) {
+          if (planeDark) planeDark.visible = false;
+          planeLight.visible = true;
+        } else if (planeDark) {
+          planeDark.visible = true;
+          planeDark.color = '#FFFFFF';
         }
         if (typeof (spline as any).setBackgroundColor === 'function') {
           (spline as any).setBackgroundColor('#F4F4FA');
         }
       } else {
-        // Dark Mode: Restore deep black floor & native blue neon lighting (eliminating gray plane)
+        // Dark Mode: Show "Plane" (Silver Roughness 01) & hide "Plane Light"
         if (spotLight && defaultSpotColorRef.current !== null) {
           spotLight.color = defaultSpotColorRef.current;
           if (defaultSpotIntensityRef.current !== null) {
             spotLight.intensity = defaultSpotIntensityRef.current;
           }
         }
-        if (plane) {
-          plane.visible = true;
-          // Force plane to pitch black so it blends into the cosmos and highlights the blue puddle
-          plane.color = '#000000';
+        if (planeDark) {
+          planeDark.visible = true;
+        }
+        if (planeLight) {
+          planeLight.visible = false;
         }
         if (typeof (spline as any).setBackgroundColor === 'function') {
           // Force solid black — 'transparent' shows Spline's native gray canvas
