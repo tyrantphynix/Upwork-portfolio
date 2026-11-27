@@ -262,7 +262,7 @@ strong {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-color: #0D0D1A;
+  background-color: #05050F;
   background-image: 
     radial-gradient(circle at 50% 48%, rgba(107, 94, 228, 0.18) 0%, rgba(243, 126, 126, 0.08) 35%, transparent 68%),
     radial-gradient(circle at 18% 25%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
@@ -286,8 +286,15 @@ strong {
   background: transparent !important;
 }
 
+/* Force Spline iframe background to black in dark mode */
+.imax-centered-hero .spline-hero-container,
+.imax-centered-hero .spline-hero-container canvas,
+.imax-centered-hero .spline-hero-container iframe {
+  background-color: #000000 !important;
+}
+
 .hero-loading-backdrop {
-  background-color: #0D0D1A;
+  background-color: #000000;
   background-image:
     radial-gradient(circle at 50% 65%, rgba(107, 94, 228, 0.35) 0%, rgba(243, 126, 126, 0.18) 32%, transparent 65%),
     radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);

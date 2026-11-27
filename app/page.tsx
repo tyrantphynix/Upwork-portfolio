@@ -579,21 +579,21 @@ export default function HomePage() {
 
       if (themeName === 'light') {
         if (spotLight) {
-          // Studio daylight lavender (loved in SS3)
-          spotLight.color = '#E0D8FF';
+          // Indigo-violet accent glow matching site theme (#6B5EE4), boosted for visibility on light bg
+          spotLight.color = '#8B6FE8';
           const baseIntensity = defaultSpotIntensityRef.current ?? 1;
-          spotLight.intensity = Math.max(baseIntensity * 1.5, 2.6);
+          spotLight.intensity = Math.max(baseIntensity * 3.5, 5.5);
         }
         if (plane) {
-          // Keep plane visible to catch real 3D shadow from robot!
+          // Keep plane visible to catch real 3D shadow from robot, lit to bright white
           plane.visible = true;
-          plane.color = '#F4F4FA';
+          plane.color = '#FFFFFF';
         }
         if (typeof (spline as any).setBackgroundColor === 'function') {
           (spline as any).setBackgroundColor('#F4F4FA');
         }
       } else {
-        // Dark Mode: Restore 100% native Spline scene defaults (recovering SS1 blue puddle & face sheen)
+        // Dark Mode: Restore deep black floor & native blue neon lighting (eliminating gray plane)
         if (spotLight && defaultSpotColorRef.current !== null) {
           spotLight.color = defaultSpotColorRef.current;
           if (defaultSpotIntensityRef.current !== null) {
@@ -602,12 +602,12 @@ export default function HomePage() {
         }
         if (plane) {
           plane.visible = true;
-          if (defaultPlaneColorRef.current !== null) {
-            plane.color = defaultPlaneColorRef.current;
-          }
+          // Force plane to pitch black so it blends into the cosmos and highlights the blue puddle
+          plane.color = '#000000';
         }
         if (typeof (spline as any).setBackgroundColor === 'function') {
-          (spline as any).setBackgroundColor('transparent');
+          // Force solid black — 'transparent' shows Spline's native gray canvas
+          (spline as any).setBackgroundColor('#000000');
         }
       }
     } catch (err) {
