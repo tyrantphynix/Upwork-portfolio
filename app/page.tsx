@@ -808,7 +808,7 @@ export default function HomePage() {
           className="imax-container"
           style={{
             position: 'relative',
-            zIndex: 3,
+            zIndex: 5,
             width: '100%',
             pointerEvents: 'none',
             display: 'flex',
@@ -1152,8 +1152,8 @@ export default function HomePage() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: '72px',
-            background: 'linear-gradient(to bottom, transparent, var(--bg-2))',
+            height: '68px',
+            background: 'linear-gradient(to bottom, transparent 0%, var(--bg-2) 60%, var(--bg-2) 100%)',
             pointerEvents: 'none',
             zIndex: 4,
           }}
@@ -1163,7 +1163,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════
           ██  POPULAR SERVICES
           ══════════════════════════════════════════════════════════════ */}
-      <section className="section" style={{ backgroundColor: 'var(--bg-2)' }}>
+      <section className="section" style={{ backgroundColor: 'var(--bg-2)', position: 'relative', zIndex: 6 }}>
         <div className="container">
           <ScrollReveal>
             <div
