@@ -586,10 +586,12 @@ export default function HomePage() {
 
       if (themeName === 'light') {
         if (spotLight) {
-          // Indigo-violet accent glow matching site theme (#6B5EE4), boosted for visibility on light bg
-          spotLight.color = '#8B6FE8';
-          const baseIntensity = defaultSpotIntensityRef.current ?? 1;
-          spotLight.intensity = Math.max(baseIntensity * 3.5, 5.5);
+          // Match Dark Mode's natural spotlight intensity so light falls identically on the robot
+          // and shows a soft purple pool on the floor instead of blowing out to pure white
+          spotLight.color = '#7C6EE6';
+          if (defaultSpotIntensityRef.current !== null) {
+            spotLight.intensity = defaultSpotIntensityRef.current;
+          }
         }
         if (planeLight) {
           if (planeDark) planeDark.visible = false;
@@ -776,6 +778,28 @@ export default function HomePage() {
                 pointerEvents: 'auto',
               }}
             />
+
+            {/* Light Mode localized purple floor light pool (additive 3D light clips to white on light planes) */}
+            {currentTheme === 'light' && splineLoaded && (
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: '76%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 'min(640px, 85vw)',
+                  height: '220px',
+                  borderRadius: '50%',
+                  background:
+                    'radial-gradient(ellipse at center, rgba(107, 94, 228, 0.34) 0%, rgba(139, 111, 232, 0.18) 42%, rgba(107, 94, 228, 0.0) 75%)',
+                  filter: 'blur(26px)',
+                  mixBlendMode: 'multiply',
+                  pointerEvents: 'none',
+                  zIndex: 2,
+                }}
+              />
+            )}
           </div>
         )}
 
